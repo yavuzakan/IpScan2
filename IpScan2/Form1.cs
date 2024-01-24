@@ -80,23 +80,15 @@ namespace IpScan2
 
                 if (cevap.Status == IPStatus.Success)
                 {
-                       
                         w2 = dr.GetValue(1).ToString();
                         w3 = "Succes";
                         w4 = "Succes.jpg";
-
-            
-
                 }
                 else
                 {
-                        
                         w2 = dr.GetValue(1).ToString();
                         w3 = "Faild";
                         w4 = "Faild.jpg";
-
-                  
-
                 }
                 i++;
 
