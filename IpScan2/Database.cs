@@ -28,7 +28,24 @@ namespace IpScan2
                     string sql = "CREATE TABLE ips (id INTEGER, ips TEXT  UNIQUE , PRIMARY KEY(id AUTOINCREMENT))";
                     SQLiteCommand command = new SQLiteCommand(sql, sqlite);
                     command.ExecuteNonQuery();
-                    
+
+                    sql = "CREATE TABLE Logs (id INTEGER, log1 TEXT ,  log2 TEXT, log3 TEXT , PRIMARY KEY(id AUTOINCREMENT))";
+                    command = new SQLiteCommand(sql, sqlite);
+                    command.ExecuteNonQuery();
+
+                    sql = "CREATE TABLE time1 (id INTEGER, time1 TEXT , PRIMARY KEY(id AUTOINCREMENT))";
+                    command = new SQLiteCommand(sql, sqlite);
+                    command.ExecuteNonQuery();
+
+
+                    var con = new SQLiteConnection(cs);
+                    con.Open();
+                    var cmd = new SQLiteCommand(con);
+                    cmd.CommandText = "INSERT INTO time1(time1) VALUES(@time1)";
+                    cmd.Parameters.AddWithValue("@time1", "10");
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
                     sqlite.Close();
                 }
             }
