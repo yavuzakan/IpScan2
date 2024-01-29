@@ -110,5 +110,71 @@ namespace IpScan2
             }
         }
 
+        public static int x()
+        {
+
+
+            int cevap = 1;
+
+            var con = new SQLiteConnection(cs);
+            con.Open();
+
+
+            string stm = "select * FROM time1 where id = 1";
+            var cmd = new SQLiteCommand(stm, con);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+
+            cevap = Int32.Parse(dr.GetValue(1).ToString());
+            }
+
+            con.Close();
+
+            return cevap;
+        }
+
+        public static void time1Edit(string x)
+        {
+            try
+            {
+                var con = new SQLiteConnection(cs);
+                con.Open();
+                var cmd = new SQLiteCommand(con);
+                string sql = "UPDATE time1 set time1='" + x + "'  where id =1";
+                cmd.CommandText = sql;
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Kayıt Tamam.");
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Database Sorunu.");
+            }
+        }
+
+        public static void LogsAdd(string log1, string log2, string log3)
+        {
+            try
+            {
+                var con = new SQLiteConnection(cs);
+                con.Open();
+                var cmd = new SQLiteCommand(con);
+                cmd.CommandText = "INSERT INTO Logs(log1,log2,log3) VALUES(@log1,@log2,@log3)";
+                cmd.Parameters.AddWithValue("@log1", log1);
+                cmd.Parameters.AddWithValue("@log2", log2);
+                cmd.Parameters.AddWithValue("@log3", log3);
+                cmd.ExecuteNonQuery();
+                con.Close();
+             
+            }
+            catch (Exception e)
+            {
+               
+            }
+        }
+
     }
 }

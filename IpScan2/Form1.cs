@@ -20,7 +20,11 @@ namespace IpScan2
         public static string w3 = "";
         public static string w4 = "";
 
-        Form2 form2 = new Form2();
+       
+        
+        
+
+
         public Form1()
         {
             InitializeComponent();
@@ -37,12 +41,17 @@ namespace IpScan2
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
             Form2 form2 = new Form2();
+            timer1.Enabled = true;
+            timer1.Tick += timer1_Tick;
+            int x = Database.x();
 
+            timer1.Interval = x * 60 * 1000;
+            timer1.Start();
         }
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
+            Form2 form2 = new Form2();
             form2.Show();
         }
 
@@ -96,6 +105,8 @@ namespace IpScan2
                         w2 = dr.GetValue(1).ToString();
                         w3 = "Faild";
                         w4 = "Faild.jpg";
+                 
+
                 }
                 i++;
 
@@ -112,6 +123,11 @@ namespace IpScan2
             try
             {
                 dataGridView1.Rows.Insert(0, w2, w3, DateTime.Now.ToString("dd/MM/yyyy HH:mm"), Image.FromFile(w4));
+
+                if (w3 == "Faild")
+                {
+                    Database.LogsAdd(w2, w3, DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+                }
             }
              catch
             {
@@ -123,7 +139,21 @@ namespace IpScan2
             button1.Text = "SCAN";
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            run1();
+        }
 
+        private void timeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 form3 = new Form3();
+            form3.Show();
+        }
 
+        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 form4 = new Form4();
+            form4.Show();
+        }
     }
 }
