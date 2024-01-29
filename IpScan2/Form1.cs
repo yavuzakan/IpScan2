@@ -48,7 +48,13 @@ namespace IpScan2
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
+            run1();
+        }
+
+        public void run1()
+        {
+
             if (backgroundWorker1.IsBusy != true)
             {
                 dataGridView1.Rows.Clear();
@@ -60,6 +66,7 @@ namespace IpScan2
                 backgroundWorker1.CancelAsync();
                 button1.Text = "SCAN";
             }
+
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
